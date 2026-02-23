@@ -82,21 +82,6 @@ async fn main() -> std::io::Result<()> {
     }
 }
 
-// fn create_module_dir(project_name: &str, module_name: &str) {
-//     let module_path = format!("{}/{}", project_name, module_name);
-//     let src = format!("src/{}", project_name);
-//     Command::new("mkdir")
-//         .current_dir(&src)
-//         .args([module_name])
-//         .status()
-//         .unwrap_or_else(|_| panic!("Failed to create {} directory", module_name));
-
-//     Command::new("touch")
-//         .current_dir(&module_path)
-//         .args(["mod.rs"])
-//         .status()
-//         .unwrap_or_else(|_| panic!("Failed to create {}/mod.rs", module_name));
-// }
 
 fn create_module_dir(project_name: &str, module_name: &str) {
     let module_dir = Path::new(project_name).join("src").join(module_name);
