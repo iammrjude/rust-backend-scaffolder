@@ -1,4 +1,4 @@
-# rust-backend-scaffolder
+# ForgeIT
 
 A Rust CLI tool that scaffolds backend projects using Cargo.  
 It creates a new Cargo binary project, adds a selected web framework dependency, optionally adds extra crates, generates a framework-specific `main.rs`, and creates common module directories.
@@ -7,12 +7,14 @@ It creates a new Cargo binary project, adds a selected web framework dependency,
 
 ## Package Info
 
-- **Name:** rust-backend-scaffolder
+- **Name:** forgeit
 - **Version:** 0.1.0
 - **Edition:** 2024
 - **Authors:**
   - Abel Osaretin <contact.abel321@gmail.com>
-  - Jude Abara <judeabara@gmail,com>
+  - Jude Abara <judeabara@gmail.com>
+  - Eregha Thompson <thompsoneregha00@gmail.com>
+  - Ibrahim Sunday <whizibrahim@gmail.com>
 
 ---
 
@@ -35,22 +37,27 @@ clap = { version = "4.5.60", features = ["derive"] }
 ### Scaffold a New Project
 
 ```bash
-cargo run scaffold --name <project_name> --framework <framework>
+forgeit scaffold --name <project_name> --framework <framework>
 ```
 
 Example:
 
 ```bash
-cargo run scaffold --name my_app --framework axum
+forgeit scaffold --name my_app --framework axum
 ```
 
 With additional dependencies:
 
 ```bash
-cargo run scaffold \
-  --name my_app \
-  --framework actix-web \
-  --deps dotenvy tracing
+forgeit scaffold
+  --name my_app
+  --framework actix-web
+  --deps dotenvy --deps tracing
+```
+
+```bash
+forgeit scaffold -n my_app -f actix-web -d dotenvy -d tracing
+
 ```
 
 ---
@@ -79,7 +86,7 @@ When you run `scaffold`, the tool:
 List supported frameworks:
 
 ```bash
-cargo run list
+forgeit list
 ```
 
 Output:
@@ -124,13 +131,13 @@ All `mod.rs` files are empty.
 
 - Uses `#[tokio::main]`
 - Binds to `127.0.0.1:3000`
-- Single `/` route returning `"Hello from Axum!"`
+- Single `/` route returning `"Hello from Axum 🦀!"`
 
 ### Actix-web
 
 - Uses `#[actix_web::main]`
 - Binds to `127.0.0.1:3000`
-- Single `/` route returning `"Hello from Actix-web!"`
+- Single `/` route returning `"Hello from Actix-web 🦀!"`
 
 ---
 
@@ -139,19 +146,19 @@ All `mod.rs` files are empty.
 Adds a crate to the **current working directory’s Cargo project**.
 
 ```bash
-cargo run add <crate_name>
+forgeit add <crate_name>
 ```
 
 Example:
 
 ```bash
-cargo run add serde
+forgeit add serde
 ```
 
 Add a specific version:
 
 ```bash
-cargo run add serde --version 1.0.197
+forgeit add serde --version 1.0.197
 ```
 
 Behavior:
@@ -175,4 +182,4 @@ Behavior:
 
 ## License
 
-No license is currently specified.
+MIT
