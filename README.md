@@ -36,26 +36,26 @@ clap = { version = "4.5.60", features = ["derive"] }
 ### Scaffold a New Project
 
 ```bash
-cargo run scaffold --name <project_name> --framework <framework>
+rust-backend-scaffolder scaffold --name <project_name> --framework <framework>
 ```
 
 Example:
 
 ```bash
-cargo run scaffold --name my_app --framework axum
+rust-backend-scaffolder scaffold --name my_app --framework axum
 ```
 
 With additional dependencies:
 
 ```bash
-cargo run scaffold
+rust-backend-scaffolder scaffold
   --name my_app
   --framework actix-web
   --deps dotenvy --deps tracing
 ```
 
 ```bash
-cargo run scaffold -n my_app -f actix-web -d dotenvy -d tracing
+rust-backend-scaffolder scaffold -n my_app -f actix-web -d dotenvy -d tracing
 
 ```
 
@@ -85,7 +85,7 @@ When you run `scaffold`, the tool:
 List supported frameworks:
 
 ```bash
-cargo run list
+rust-backend-scaffolder list
 ```
 
 Output:
@@ -145,19 +145,19 @@ All `mod.rs` files are empty.
 Adds a crate to the **current working directory’s Cargo project**.
 
 ```bash
-cargo run add <crate_name>
+rust-backend-scaffolder add <crate_name>
 ```
 
 Example:
 
 ```bash
-cargo run add serde
+rust-backend-scaffolder add serde
 ```
 
 Add a specific version:
 
 ```bash
-cargo run add serde --version 1.0.197
+rust-backend-scaffolder add serde --version 1.0.197
 ```
 
 Behavior:
