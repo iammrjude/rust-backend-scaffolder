@@ -12,7 +12,8 @@ It creates a new Cargo binary project, adds a selected web framework dependency,
 - **Edition:** 2024
 - **Authors:**
   - Abel Osaretin <contact.abel321@gmail.com>
-  - Jude Abara <judeabara@gmail,com>
+  - Jude Abara <judeabara@gmail.com>
+  - Eregha Thompson <thompsoneregha00@gmail.com>
 
 ---
 
@@ -47,11 +48,18 @@ cargo run scaffold --name my_app --framework axum
 With additional dependencies:
 
 ```bash
-cargo run scaffold \
-  --name my_app \
-  --framework actix-web \
-  --deps dotenvy tracing
+cargo run scaffold
+  --name my_app
+  --framework actix-web
+  --deps dotenvy --deps tracing
 ```
+
+cargo run scaffold
+-n my_app
+-f actix-web
+-d dotenvy -d tracing
+
+````
 
 ---
 
@@ -80,7 +88,7 @@ List supported frameworks:
 
 ```bash
 cargo run list
-```
+````
 
 Output:
 
@@ -124,13 +132,13 @@ All `mod.rs` files are empty.
 
 - Uses `#[tokio::main]`
 - Binds to `127.0.0.1:3000`
-- Single `/` route returning `"Hello from Axum!"`
+- Single `/` route returning `"Hello from Axum 🦀!"`
 
 ### Actix-web
 
 - Uses `#[actix_web::main]`
 - Binds to `127.0.0.1:3000`
-- Single `/` route returning `"Hello from Actix-web!"`
+- Single `/` route returning `"Hello from Actix-web 🦀!"`
 
 ---
 
@@ -175,4 +183,4 @@ Behavior:
 
 ## License
 
-No license is currently specified.
+MIT

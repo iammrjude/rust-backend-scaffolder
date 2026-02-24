@@ -47,7 +47,7 @@ fn get_main_content(framework: &str) -> &'static str {
 
 #[tokio::main]
 async fn main() {
-    let app = Router::new().route("/", get(|| async { "Hello from Axum!" }));
+    let app = Router::new().route("/", get(|| async { "Hello from Axum! 🦀" }));
     let listener = tokio::net::TcpListener::bind("127.0.0.1:3000").await.unwrap();
     println!("Listening on http://127.0.0.1:3000");
     axum::serve(listener, app).await.unwrap();
@@ -59,7 +59,7 @@ async fn main() {
 
 #[get("/")]
 async fn index() -> impl Responder {
-    HttpResponse::Ok().body("Hello from Actix-web!")
+    HttpResponse::Ok().body("Hello from Actix-web! 🦀")
 }
 
 #[actix_web::main]
@@ -113,44 +113,12 @@ fn create_gitignore(project_name: &str) {
 
 
 "#;
-    
+
     let gitignore_path = Path::new(project_name).join(".gitignore");
     fs::write(gitignore_path, gitignore_content)
         .unwrap_or_else(|_| panic!("Failed to create .gitignore file"));
 }
 
-fn init_git_repo(project_name: &str) -> Result<(), git2::Error> {
-    let repo_path = Path::new(project_name);
-
-    // Initialize a new repository
-    let repo = Repository::init(repo_path)?;
-
-    // Create a signature for the commit
-    let sig = Signature::now("Rust Backend Scaffolder", "scaffolder@example.com")?;
-
-    // Add all files to the index
-    let mut index = repo.index()?;
-    index.add_all(["."].iter(), git2::IndexAddOption::DEFAULT, None)?;
-    index.write()?;
-
-    // Create the initial commit
-    let tree_id = index.write_tree()?;
-    let tree = repo.find_tree(tree_id)?;
-
-    // Since this is a new repository, there are no parent commits
-    let parents: Vec<&git2::Commit> = vec![];
-
-    repo.commit(
-        Some("HEAD"),
-        &sig,
-        &sig,
-        "Initial commit: Scaffolded project",
-        &tree,
-        &parents,
-    )?;
-
-    Ok(())
-}
 
 fn scaffold_project(name: &str, framework: &str, deps: Option<Vec<String>>) {
     println!("Creating new Cargo project: {}", name);
@@ -201,15 +169,8 @@ fn scaffold_project(name: &str, framework: &str, deps: Option<Vec<String>>) {
     }
 
     // Create .gitignore file
-    println!("Creating .gitignore file");
+    println!("\nCreating .gitignore file");
     create_gitignore(name);
-
-    // Initialize git repository
-    println!("Initializing git repository");
-    match init_git_repo(name) {
-        Ok(_) => println!("Git repository initialized successfully"),
-        Err(e) => eprintln!("Failed to initialize git repository: {}", e),
-    }
 
     println!("\n✅ Project '{}' scaffolded successfully!", name);
     println!("👉 cd {} && cargo run", name);
