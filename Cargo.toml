@@ -1,6 +1,6 @@
 [package]
 name = "rust-backend-scaffolder"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["Abel Osaretin <contact.abel321@gmail.com>, Jude Abara <judeabara@gmail.com>, Eregha Thompson <thompsoneregha00@gmail.com>"]
 description = "A Rust CLI that scaffolds backend projects with a chosen framework and standard structure."
