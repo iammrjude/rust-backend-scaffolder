@@ -54,12 +54,10 @@ cargo run scaffold
   --deps dotenvy --deps tracing
 ```
 
-cargo run scaffold
--n my_app
--f actix-web
--d dotenvy -d tracing
+```bash
+cargo run scaffold -n my_app -f actix-web -d dotenvy -d tracing
 
-````
+```
 
 ---
 
@@ -88,7 +86,7 @@ List supported frameworks:
 
 ```bash
 cargo run list
-````
+```
 
 Output:
 
