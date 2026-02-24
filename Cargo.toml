@@ -1,8 +1,8 @@
 [package]
-name = "rust-backend-scaffolder"
-version = "0.1.2"
+name = "forgeit"
+version = "0.1.0"
 edition = "2024"
-authors = ["Abel Osaretin <contact.abel321@gmail.com>, Jude Abara <judeabara@gmail.com>, Eregha Thompson <thompsoneregha00@gmail.com>"]
+authors = ["Abel Osaretin <contact.abel321@gmail.com>, Jude Abara <judeabara@gmail.com>, Eregha Thompson <thompsoneregha00@gmail.com> Ibrahim Sunday <whizibrahim@gmail.com>"]
 description = "A Rust CLI that scaffolds backend projects with a chosen framework and standard structure."
 license = "MIT"
 repository = "https://github.com/iammrjude/rust-backend-scaffolder"
