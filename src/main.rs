@@ -1,5 +1,4 @@
 use clap::{Parser, Subcommand};
-use git2::{Repository, Signature};
 use std::{fs, path::Path, process::Command};
 
 #[derive(Parser, Debug)]
