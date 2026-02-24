@@ -1,4 +1,5 @@
 use clap::{Parser, Subcommand};
+use git2::{Repository, Signature};
 use std::{fs, path::Path, process::Command};
 
 #[derive(Parser, Debug)]
@@ -80,7 +81,6 @@ async fn main() -> std::io::Result<()> {
     }
 }
 
-
 fn create_module_dir(project_name: &str, module_name: &str) {
     let module_dir = Path::new(project_name).join("src").join(module_name);
     fs::create_dir_all(&module_dir)
@@ -99,6 +99,57 @@ fn add_dependency(project_name: &str, dep: &str, features: Option<&str>) -> bool
     }
 
     cmd.status().expect("Failed to run cargo add").success()
+}
+
+fn create_gitignore(project_name: &str) {
+    let gitignore_content = r#"# Rust
+/target/
+
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+
+"#;
+    
+    let gitignore_path = Path::new(project_name).join(".gitignore");
+    fs::write(gitignore_path, gitignore_content)
+        .unwrap_or_else(|_| panic!("Failed to create .gitignore file"));
+}
+
+fn init_git_repo(project_name: &str) -> Result<(), git2::Error> {
+    let repo_path = Path::new(project_name);
+
+    // Initialize a new repository
+    let repo = Repository::init(repo_path)?;
+
+    // Create a signature for the commit
+    let sig = Signature::now("Rust Backend Scaffolder", "scaffolder@example.com")?;
+
+    // Add all files to the index
+    let mut index = repo.index()?;
+    index.add_all(["."].iter(), git2::IndexAddOption::DEFAULT, None)?;
+    index.write()?;
+
+    // Create the initial commit
+    let tree_id = index.write_tree()?;
+    let tree = repo.find_tree(tree_id)?;
+
+    // Since this is a new repository, there are no parent commits
+    let parents: Vec<&git2::Commit> = vec![];
+
+    repo.commit(
+        Some("HEAD"),
+        &sig,
+        &sig,
+        "Initial commit: Scaffolded project",
+        &tree,
+        &parents,
+    )?;
+
+    Ok(())
 }
 
 fn scaffold_project(name: &str, framework: &str, deps: Option<Vec<String>>) {
@@ -147,6 +198,17 @@ fn scaffold_project(name: &str, framework: &str, deps: Option<Vec<String>>) {
     let modules = vec!["services", "models", "handlers", "routes"];
     for module in modules {
         create_module_dir(name, module);
+    }
+
+    // Create .gitignore file
+    println!("Creating .gitignore file");
+    create_gitignore(name);
+
+    // Initialize git repository
+    println!("Initializing git repository");
+    match init_git_repo(name) {
+        Ok(_) => println!("Git repository initialized successfully"),
+        Err(e) => eprintln!("Failed to initialize git repository: {}", e),
     }
 
     println!("\n✅ Project '{}' scaffolded successfully!", name);

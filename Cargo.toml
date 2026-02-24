@@ -6,3 +6,4 @@ authors = ["Abel Osaretin <contact.abel321@gmail.com>, Jude Abara <judeabara@gma
 
 [dependencies]
 clap = { version = "4.5.60", features = ["derive"] }
+git2 = "0.18"
